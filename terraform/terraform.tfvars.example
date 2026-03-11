@@ -1,0 +1,5 @@
+# terraform.tfvars.example — copier vers terraform.tfvars et remplir
+project_id          = "your-gcp-project-id"
+region              = "us-east1"
+zone                = "us-east1-b"
+mysql_root_password = "your-secure-password"

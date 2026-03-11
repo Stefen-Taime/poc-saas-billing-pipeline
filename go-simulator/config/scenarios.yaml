@@ -1,0 +1,114 @@
+# config/scenarios.yaml — Benchmarks SaaS calibrés
+
+simulation:
+  merchants: 500
+  history_years: 1
+  realtime_enabled: true
+
+# BENCHMARKS SaaS
+benchmarks:
+  monthly_churn_rate: 0.035
+  failed_payment_rate: 0.06
+  trial_conversion_rate: 0.65
+  nrr_target: 1.10
+  mrr_growth_monthly: 0.05
+  upgrade_rate_monthly: 0.015
+  reactivation_rate: 0.02
+
+# PLANS TARIFAIRES
+plans:
+  starter:
+    montant_cad: 99
+    ratio: 0.35
+  pro:
+    montant_cad: 299
+    ratio: 0.45
+  enterprise:
+    montant_cad: 799
+    ratio: 0.15
+  enterprise_plus:
+    montant_cad: 1499
+    ratio: 0.05
+
+# CYCLE DE VIE MARCHAND
+lifecycle:
+  trial:
+    enabled: true
+    duree_jours: 14
+    conversion_rate: 0.65
+
+  churn:
+    voluntary:
+      monthly_rate: 0.025
+      motifs:
+        - motif: "trop_cher"
+          poids: 0.35
+        - motif: "manque_fonctions"
+          poids: 0.25
+        - motif: "concurrent"
+          poids: 0.20
+        - motif: "fermeture_business"
+          poids: 0.20
+    involuntary:
+      monthly_rate: 0.010
+      max_tentatives: 3
+      delai_retry_jours: [3, 5]
+
+  failed_payments:
+    rate: 0.06
+    recovery:
+      retry_1_success_rate: 0.70
+      retry_2_success_rate: 0.50
+    codes_erreur:
+      - code: "insufficient_funds"
+        poids: 0.40
+      - code: "card_expired"
+        poids: 0.25
+      - code: "do_not_honor"
+        poids: 0.20
+      - code: "lost_card"
+        poids: 0.15
+
+  plan_changes:
+    upgrade:
+      monthly_rate: 0.015
+      transitions:
+        - from: "starter"
+          to: "pro"
+          poids: 0.60
+        - from: "pro"
+          to: "enterprise"
+          poids: 0.30
+        - from: "enterprise"
+          to: "enterprise_plus"
+          poids: 0.10
+    downgrade:
+      monthly_rate: 0.005
+
+  reactivation:
+    rate: 0.02
+    delai_median_jours: 45
+
+# SAISONNALITE
+seasonality:
+  enabled: true
+  summer_slowdown:
+    mois: [7, 8]
+    new_merchant_rate: 0.60
+  january_spike:
+    mois: [1]
+    new_merchant_rate: 1.40
+
+# GEOGRAPHIE
+geography:
+  distributions:
+    - province: "QC"
+      poids: 0.35
+    - province: "ON"
+      poids: 0.30
+    - province: "BC"
+      poids: 0.15
+    - province: "AB"
+      poids: 0.12
+    - province: "other"
+      poids: 0.08

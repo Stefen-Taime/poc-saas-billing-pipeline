@@ -1,0 +1,4 @@
+{
+  "_comment": "DEPRECATED — This file is no longer used. Debezium Server uses application.properties (managed via Terraform ConfigMap). Kept for reference only.",
+  "_see": "terraform/modules/k8s-debezium/main.tf → kubernetes_config_map.debezium_config"
+}

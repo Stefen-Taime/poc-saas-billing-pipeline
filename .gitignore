@@ -1,0 +1,43 @@
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/*.tfvars
+terraform/.terraform.lock.hcl
+terraform/tfplan
+terraform/*.tfplan
+!terraform/terraform.tfvars.example
+
+# Secrets
+*.env
+.env.*
+credentials*.json
+*.pem
+*.key
+
+# Claude Code
+.claude/
+
+# Go
+go-simulator/go-simulator
+go-simulator/bin/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp / audit
+*.audit
+SENSITIVE_DATA_AUDIT*
+/tmp/
